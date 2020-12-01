@@ -9,21 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProStagesController extends AbstractController
 {
     /**
-<<<<<<< HEAD
-     * @Route("/", name="accueil-page")
-=======
-     * @Route("/", name="accueil_ProStages")
->>>>>>> route-accueil
-     */
+     * @Route("/", name="accueil")
+	 */
     public function index(): Response
     {
-        return $this->render('pro_stages/index.html.twig', [
-<<<<<<< HEAD
-            'controller_name' => 'Bienvenue sur la page d"accueil de ProStages',
-=======
-            'controller_name' => 'Bienvenue sur la page d''accueil de ProStages',
->>>>>>> route-accueil
-        ]);
+        return $this->render('pro_stages/index.html.twig');
     }
+	
+	/**
+	 * @Route("/entreprises", name="entreprises")
+	 */
+	public fonction entreprises(): Response
+	{
+		return $this->render('pro_stages/index.html.twig');
+	}
 }
 
