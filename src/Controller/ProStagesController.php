@@ -19,9 +19,25 @@ class ProStagesController extends AbstractController
 	/**
 	 * @Route("/entreprises", name="entreprises")
 	 */
-	public fonction entreprises(): Response
+	public function entreprises(): Response
 	{
-		return $this->render('pro_stages/index.html.twig');
+		return $this->render('pro_stages/entreprises.html.twig');
+	}
+	
+	/**
+	 * @Route("/formations", name="formations")
+	 */
+	public function formations(): Response
+	{
+		return $this->render('pro_stages/formations.html.twig');
+	}
+	
+	/**
+	 * @Route("/stages/{id}", name="stages")
+	 */
+	public function stages($id): Response
+	{
+		return $this->render('pro_stages/stages.html.twig', ['idStage' => $id]);
 	}
 }
 
