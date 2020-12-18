@@ -2,11 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}ProStages{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block separateur %}
+		<h1> ---------------------------- </h1>
+		{% endblock %}
+		{% block contenu %}
+		{% endblock %}       
     </body>
+	<footer>
+		{% block footer %}
+		<p> @2020 Miguel Viegas </p> 
+		<p> https://github.com/sohny64/ProStage </p>
+		{% endblock %}
+	</footer>
 </html>
