@@ -22,7 +22,7 @@ class Stage
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $intitule;
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=true)
@@ -50,12 +50,13 @@ class Stage
     private $experienceRequise;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="Stage")
-     */
+     * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="Stage")
+     * @ORM\JoinColumn (nullable=false)
+	 */
     private $Formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="Stages")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="Stage")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Entreprise;
@@ -70,14 +71,14 @@ class Stage
         return $this->id;
     }
 
-    public function getIntitule(): ?string
+    public function getTitre(): ?string
     {
-        return $this->intitule;
+        return $this->titre;
     }
 
-    public function setIntitule(string $intitule): self
+    public function setTitre(string $titre): self
     {
-        $this->intitule = $intitule;
+        $this->titre = $titre;
 
         return $this;
     }

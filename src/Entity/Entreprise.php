@@ -42,11 +42,11 @@ class Entreprise
     /**
      * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="Entreprise")
      */
-    private $Stages;
+    private $stages;
 
     public function __construct()
     {
-        $this->Stages = new ArrayCollection();
+        $this->stages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,13 +107,13 @@ class Entreprise
      */
     public function getStages(): Collection
     {
-        return $this->Stages;
+        return $this->stages;
     }
 
     public function addStage(Stage $stage): self
     {
-        if (!$this->Stages->contains($stage)) {
-            $this->Stages[] = $stage;
+        if (!$this->stages->contains($stage)) {
+            $this->stages[] = $stage;
             $stage->setEntreprise($this);
         }
 
@@ -122,7 +122,7 @@ class Entreprise
 
     public function removeStage(Stage $stage): self
     {
-        if ($this->Stages->removeElement($stage)) {
+        if ($this->stages->removeElement($stage)) {
             // set the owning side to null (unless already changed)
             if ($stage->getEntreprise() === $this) {
                 $stage->setEntreprise(null);
