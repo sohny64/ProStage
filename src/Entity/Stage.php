@@ -51,7 +51,7 @@ class Stage
 
     /**
      * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="Stage")
-     * @ORM\JoinColumn (nullable=false)
+	 * @ORM\JoinColumn(nullable=false)
 	 */
     private $Formation;
 
@@ -60,11 +60,6 @@ class Stage
      * @ORM\JoinColumn(nullable=false)
      */
     private $Entreprise;
-
-    public function __construct()
-    {
-        $this->Formation = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -143,27 +138,15 @@ class Stage
         return $this;
     }
 
-    /**
-     * @return Collection|Formation[]
-     */
-    public function getFormation(): Collection
+    public function getFormation(): ?Formation
     {
         return $this->Formation;
     }
 
-    public function addFormation(Formation $formation): self
+    public function setFormation(Formation $Formation): self
     {
-        if (!$this->Formation->contains($formation)) {
-            $this->Formation[] = $formation;
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        $this->Formation->removeElement($formation);
-
+        $this->Formation = $Formation;
+   
         return $this;
     }
 

@@ -35,7 +35,7 @@ class Formation
     private $ville;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Stage::class, mappedBy="Formation")
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="Formation")
      */
     private $stages;
 
@@ -97,7 +97,7 @@ class Formation
     {
         if (!$this->stages->contains($stage)) {
             $this->stages[] = $stage;
-            $stage->addFormation($this);
+            $stage->setFormation($this);
         }
 
         return $this;
@@ -106,7 +106,10 @@ class Formation
     public function removeStage(Stage $stage): self
     {
         if ($this->stages->removeElement($stage)) {
-            $stage->removeFormation($this);
+			// set the owning side to null (unless already changed)
+			if ($stage->getFormation() === $this) {	
+				$stage->removeFormation(null);
+			}
         }
 
         return $this;
