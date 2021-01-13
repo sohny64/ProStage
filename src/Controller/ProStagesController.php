@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Stage;
+use App\Entity\Entreprise;
+use App\Entity\Formation;
 
 class ProStagesController extends AbstractController
 {
@@ -13,31 +16,42 @@ class ProStagesController extends AbstractController
 	 */
     public function index(): Response
     {
-        return $this->render('prostages/index.html.twig');
+		    $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);
+
+        $stages = $repositoryStage->findall();
+
+        return $this->render('prostages/index.html.twig', ['stages' => $stages]);
     }
-	
+
 	/**
 	 * @Route("/entreprises", name="entreprises")
 	 */
 	public function entreprises(): Response
 	{
-		return $this->render('prostages/entreprises.html.twig');
+    $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
+
+    $entreprises = $repositoryEntreprise->findall();
+
+		return $this->render('prostages/entreprises.html.twig', ['entreprises' => $entreprises]);
 	}
-	
+
 	/**
 	 * @Route("/formations", name="formations")
 	 */
 	public function formations(): Response
 	{
-		return $this->render('prostages/formations.html.twig');
+    $repositoryFormation = $this->getDoctrine()->getRepository(Formation::class);
+
+    $formations = $repositoryFormation->findall();
+
+		return $this->render('prostages/formations.html.twig', ['formations' => $formations]);
 	}
-	
+
 	/**
 	 * @Route("/stages/{id}", name="stages")
 	 */
-	public function stages($id): Response
+	public function stages(Stage $stage): Response
 	{
-		return $this->render('prostages/stages.html.twig', ['idStage' => $id]);
+		return $this->render('prostages/stages.html.twig', ['stage' => $stage]);
 	}
 }
-
