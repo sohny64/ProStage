@@ -12,7 +12,7 @@ use App\Entity\Formation;
 class ProStagesController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="prostages_accueil")
 	 */
     public function index(): Response
     {
@@ -23,20 +23,29 @@ class ProStagesController extends AbstractController
         return $this->render('prostages/index.html.twig', ['stages' => $stages]);
     }
 
+	   /**
+	    * @Route("/entreprises", name="prostages_entreprises")
+	    */
+  	public function entreprises(): Response
+	  {
+      $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
+
+      $entreprises = $repositoryEntreprise->findall();
+
+		  return $this->render('prostages/entreprises.html.twig', ['entreprises' => $entreprises]);
+	  }
+
+  /**
+     * @Route("/entreprise/{id}/stages", name="prostages_entreprises_stage")
+     */
+    public function getByEntreprise(Entreprise $stages) // La vue affichera la liste des stages proposés par une entreprise
+    {
+        // Envoyer les ressources récupérées à la vue chargée de les afficher
+        return $this->render('prostages/index.html.twig', [ 'stages' => $stages->getStages() ]);
+    }
+
 	/**
-	 * @Route("/entreprises", name="entreprises")
-	 */
-	public function entreprises(): Response
-	{
-    $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
-
-    $entreprises = $repositoryEntreprise->findall();
-
-		return $this->render('prostages/entreprises.html.twig', ['entreprises' => $entreprises]);
-	}
-
-	/**
-	 * @Route("/formations", name="formations")
+	 * @Route("/formations", name="prostages_formations")
 	 */
 	public function formations(): Response
 	{
@@ -47,8 +56,17 @@ class ProStagesController extends AbstractController
 		return $this->render('prostages/formations.html.twig', ['formations' => $formations]);
 	}
 
+  /**
+     * @Route("/formation/{id}/stages", name="prostages_formations_stage")
+     */
+    public function getByFormation(Formation $stages) // La vue affichera la liste des stages proposés pour une formation
+    {
+        // Envoyer les ressources récupérées à la vue chargée de les afficher
+        return $this->render('prostages/index.html.twig', [ 'stages' => $stages->getStages() ]);
+    }
+
 	/**
-	 * @Route("/stages/{id}", name="stages")
+	 * @Route("/stages/{id}", name="prostages_stages")
 	 */
 	public function stages(Stage $stage): Response
 	{

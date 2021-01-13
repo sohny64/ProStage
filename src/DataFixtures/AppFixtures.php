@@ -14,19 +14,19 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 		$faker = \Faker\Factory::create('fr_FR');
-		
+
 		//Creer les diférents types de Formations
         $nomFormations = array("DUT informatique","DUT GEA","DUT GIM","BTS SN","BTS SIO");
         $listeDesFormations = array();
         foreach ($nomFormations as $nomFormation  ) {
           $formation = new Formation();
           $formation->setIntitule($nomFormation);
-		  $formation->setVille($faker->city);
-		  $formation->setNiveau($faker->regexify('BAC + [1-5]'));	  
+		      $formation->setVille($faker->city);
+		      $formation->setNiveau($faker->regexify('BAC+ [1-5]'));	  
           $manager->persist($formation);
           $listeDesFormations[]=$formation;
         }
-		
+
 		//Creer les différentes entreprises
         for($i = 0;$i<10;$i++){
           $entreprise = new Entreprise();
@@ -34,8 +34,8 @@ class AppFixtures extends Fixture
 		  $entreprise->setActivite("Informatique");
           $entreprise->setAdresse($faker->streetAddress);
 		  $entreprise->setSite($faker->url);
-          
-		  
+
+
 		  //creer les stages que propose cette entreprise
           $nombresStages = $faker->numberBetween($min = 0, $max = 10);
           for($i = 0;$i<$nombresStages;$i++){
@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
             $stage->setDuree($faker->numberBetween($min =15, $max =180));
             $stage->setCompetencesRequises($faker->paragraph($nbSentences = 1, $variableNbSentences = true));
             $stage->setExperienceRequise($faker->sentence($nbWords = 6, $variableNbWords = true));
-			
+
 
             //lier l'entreprise au stage
             $entreprise->addStage($stage);
@@ -57,10 +57,10 @@ class AppFixtures extends Fixture
 
             $manager->persist($stage);
           }
-		
+
         $manager->persist($entreprise);
         }
-		
+
         foreach ($listeDesFormations as $formation) {
             $manager->persist($formation);
         }

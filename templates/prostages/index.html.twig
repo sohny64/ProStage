@@ -1,18 +1,24 @@
 {% extends 'base.html.twig' %}
 
-
 {% block contenu %}
 
-<h1> Bienvenue sur ProStages </h1>
-
-<p>
-	Vous trouverez ci-dessous les stages proposés.
-</p>
-<ul>
-	<li>
-		<a> Développeur web </a>
-	</li>
-</ul>
-
+	<div class="container-fluid">
+	<div class="row">
+			{%for stage in stages%}
+			<div class="col-md-4 col-xs-1 mx-auto">
+				<div class="card">
+					<div class="card-body">
+					<img src="https://picsum.photos/350/" class="card-img-top" alt="Image">
+						<h5 class="card-title"> {{stage.titre}} </h5>
+						<p class="card-text">Durée : {{stage.duree}} jours</p>
+						<p class="card-text">Date de début : {{stage.dateDebut | date("d/m/Y")}}</p>
+						<a href="{{path('prostages_stages',{'id' : stage.id})}}" class="btn btn-primary">Plus de détails</a>
+					</div>
+				</div>
+			</div>
+			<br>
+		{%endfor%}
+		</div>
+	</div>
 
 {% endblock %}
