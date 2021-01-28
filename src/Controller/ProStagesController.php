@@ -65,6 +65,15 @@ class ProStagesController extends AbstractController
 		return $this->render('prostages/formations.html.twig', ['formations' => $formations]);
 	}
 
+  public function formationFindBy(Formation $formation)
+    {
+      $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);
+
+      $stages = $repositoryStage->findByFormation($formation);
+
+      return $this->render('prostage/affichageFormation.html.twig', ['formation' => $formation, 'stages' => $stages]);
+    }
+
   /**
      * @Route("/formation/{id}/stages", name="prostages_formations_stage")
      */
