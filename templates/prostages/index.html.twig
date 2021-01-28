@@ -6,9 +6,9 @@
 	<div class="row">
 			{%for stage in stages%}
 			<div class="col-md-4 col-xs-1 mx-auto">
-				<div class="card">
+				<div class="card" style="width: 18rem;">
 					<div class="card-body">
-					<img src="https://picsum.photos/350/" class="card-img-top" alt="Image">
+						<img src="https://picsum.photos/350/" class="card-img-top" alt="Image">
 						<h5 class="card-title"> {{stage.titre}} </h5>
 						<p class="card-text">Durée : {{stage.duree}} jours</p>
 						<p class="card-text">Date de début : {{stage.dateDebut | date("d/m/Y")}}</p>
@@ -16,7 +16,6 @@
 					</div>
 				</div>
 			</div>
-			<br>
 		{%endfor%}
 		</div>
 	</div>
