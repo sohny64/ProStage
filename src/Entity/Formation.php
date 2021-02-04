@@ -107,7 +107,7 @@ class Formation
     {
         if ($this->stages->removeElement($stage)) {
 			// set the owning side to null (unless already changed)
-			if ($stage->getFormation() === $this) {	
+			if ($stage->getFormation() === $this) {
 				$stage->removeFormation(null);
 			}
         }

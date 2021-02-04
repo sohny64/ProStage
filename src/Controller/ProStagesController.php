@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 use App\Entity\Stage;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
@@ -35,17 +37,21 @@ class ProStagesController extends AbstractController
 		  return $this->render('prostages/entreprises.html.twig', ['entreprises' => $entreprises]);
 	  }
 
-    public function entrepriseFindBy(Entreprise $entreprise)
+    /**
+     * @Route("/entreprises/{nom}", name="prostages_stagesParEntreprise")
+     * @ParamConverter("nom", options={"nom" = "nom"})
+     */
+    public function stageParEntreprise($nom)
     {
       $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);
 
-      $stages = $repositoryStage->findByEntreprise($entreprise);
+      $stages = $repositoryStage->findByEntreprise($nom);
 
-      return $this->render('prostages/entreprises.html.twig', ['entreprise' => $entreprise, 'stages' => $stages]);
+      return $this->render('prostages/stageParEntreprise.html.twig', ['nom' => $nom, 'stages' => $stages]);
     }
 
     /**
-     * @Route("/entreprise/{id}/stages", name="prostages_entreprises_stage")
+     * @Route("/entreprises/{nom}/stages", name="prostages_entreprises_stage")
      */
     public function getByEntreprise(Entreprise $stages) // La vue affichera la liste des stages proposés par une entreprise
     {
@@ -65,17 +71,21 @@ class ProStagesController extends AbstractController
 		return $this->render('prostages/formations.html.twig', ['formations' => $formations]);
 	}
 
-  public function formationFindBy(Formation $formation)
+  /**
+   * @Route("/formations/{intitule}", name="prostages_stagesParFormation")
+   
+   */
+  public function stageParFormation($intitule)
     {
       $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);
 
-      $stages = $repositoryStage->findByFormation($formation);
+      $stages = $repositoryStage->findByFormation($intitule);
 
-      return $this->render('prostage/affichageFormation.html.twig', ['formation' => $formation, 'stages' => $stages]);
+      return $this->render('prostages/stageParFormation.html.twig', ['nomFormation' => $intitule, 'stages' => $stages]);
     }
 
   /**
-     * @Route("/formation/{id}/stages", name="prostages_formations_stage")
+     * @Route("/formations/{id}/stages", name="prostages_formations_stage")
      */
     public function getByFormation(Formation $stages) // La vue affichera la liste des stages proposés pour une formation
     {

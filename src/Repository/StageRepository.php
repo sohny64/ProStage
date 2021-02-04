@@ -26,7 +26,8 @@ class StageRepository extends ServiceEntityRepository
     public function findByEntreprise($nom)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.entreprise = :val')
+            ->join('s.Entreprise', 'e')
+            ->andWhere('e.nom = :val')
             ->setParameter('val', $nom)
             ->getQuery()
             ->getResult()
@@ -38,22 +39,20 @@ class StageRepository extends ServiceEntityRepository
      * @return Stage[] Returns an array of Stage objects
      */
 
-   public function findByFormation($formation)
+   public function findByFormation($intitule)
    {
        //Recuperation du gestionnaire d'entite
        $entityManager = $this->getEntityManager();
 
        //Construction de la requete
-       $requete = $entityManager-createQuery(
-         'SELECT s, e
-         FROM App\Entity\Stage s
-         JOIN s.formations f
-         JOIN s.entreprise e
-         WHERE f = :formation'
-        );
+       $requete = $entityManager->createQuery(
+                  'SELECT s, f
+                    FROM App\Entity\Stage s
+                    JOIN s.Formation f
+                    WHERE f.intitule = :intitule');
 
         //Attribution de la valeur des paramètres injectés dans la requête
-        $requete->setParameter('formation', $formation);
+        $requete->setParameter('intitule', $intitule);
 
         //Execution de la requête
         return $requete->execute();

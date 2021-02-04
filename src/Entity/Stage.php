@@ -50,9 +50,9 @@ class Stage
     private $experienceRequise;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="Stage")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
+     * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="stages")
+	   * @ORM\JoinColumn(nullable=false)
+	   */
     private $Formation;
 
     /**
@@ -146,7 +146,7 @@ class Stage
     public function setFormation(Formation $Formation): self
     {
         $this->Formation = $Formation;
-   
+
         return $this;
     }
 

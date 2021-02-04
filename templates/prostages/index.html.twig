@@ -11,6 +11,7 @@
 						<img src="https://picsum.photos/350/" class="card-img-top" alt="Image">
 						<h5 class="card-title"> {{stage.titre}} </h5>
 						<p class="card-text">Durée : {{stage.duree}} jours</p>
+						<p class="card-text">Entreprise : {{stage.entreprise.nom}}</p>
 						<p class="card-text">Date de début : {{stage.dateDebut | date("d/m/Y")}}</p>
 						<a href="{{path('prostages_stages',{'id' : stage.id})}}" class="btn btn-primary">Plus de détails</a>
 					</div>
