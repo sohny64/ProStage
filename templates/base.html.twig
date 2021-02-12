@@ -27,6 +27,9 @@
 				<li class="nav-item">
 				  <a class="nav-link" href="/entreprises">Entreprises</a>
 				</li>
+        <li class="nav-item">
+          <a class="nav-link" href="/creer-entreprise">Créer Entreprise</a>
+        </li>
 			  </ul>
 			</div>
 		  </div>
@@ -69,10 +72,12 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 		{% endblock %}
     </body>
-	<footer>
+	<footer class="footer fixed-bottom">
 		{% block footer %}
-		<p align="center"> @2020 Miguel Viegas </p>
-		<a href="https://github.com/sohny64/ProStage" align="center" > https://github.com/sohny64/ProStage </a>
-		{% endblock %}
+    <center>
+		    <p> @2020 Miguel Viegas </p>
+		    <a href="https://github.com/sohny64/ProStage"> https://github.com/sohny64/ProStage </a>
+    </center>
+    {% endblock %}
 	</footer>
 </html>

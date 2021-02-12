@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block contenu %}
+{{ form_start(form)}}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3><center>
+				Créer entreprise
+			</center></h3>
+		</div>
+	</div>
+
+	<div class="row">
+        <div class="col-md-4">
+	    </div>
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<form role="form">
+              <center>
+                        <div class="form-group">
+                                        {{ form_label(form.nom,"Nom de l'entreprise : ") }}<br>
+                                        {{ form_errors(form.nom) }}
+                                        {{ form_widget(form.nom) }}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                                {{ form_label(form.activite,"Domaine d'activité : ") }}<br>
+                                {{ form_errors(form.activite) }}
+                                {{ form_widget(form.activite) }}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                                {{ form_label(form.adresse,'Adresse : ') }}<br>
+                                {{ form_errors(form.adresse) }}
+                                {{ form_widget(form.adresse) }}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                                {{ form_label(form.site,'Site Web : ') }}<br>
+                                {{ form_errors(form.site) }}
+                                {{ form_widget(form.site) }}
+                        </div>
+                        <br>
+                        <br>
+                </center>
+                        <center><button class="btn btn-primary" type="submit" >Valider</button></center>
+			        </form>
+				</div>
+			</div>
+		</div>
+
+        <div class="col-md-4">
+		</div>
+
+	</div>
+
+</div>
+{{ form_end(form)}}
+
+{% endblock %}

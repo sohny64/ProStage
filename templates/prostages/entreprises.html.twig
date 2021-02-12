@@ -12,12 +12,18 @@
 				  <p class="card-text">Adresse : {{entreprise.adresse}}</p>
 				  <p class="card-text">Activité : {{entreprise.activite}}</p>
 				  <p class="card-text">Site : {{entreprise.site}}</p>
-				  <a href="{{path('prostages_entreprises_stage',{'id' : entreprise.id})}}" class="btn btn-primary">Plus de détails</a>
+				  <a href="{{path('prostages_entreprises_stage',{'nom' : entreprise.nom})}}" class="btn btn-primary">Plus de détails</a>
+          <a href="/modifier-entreprise/{{entreprise.nom}}" class="btn btn-primary">Modifier l'entreprise</a>
 				</div>
 			</div>
 		</div>
 		{%endfor%}
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<center>
+  <button class="btn btn-primary"><a href="/creer-entreprise"><font color="white">Créer une Entreprise</font></a></button>
+</center>
 {% endblock %}

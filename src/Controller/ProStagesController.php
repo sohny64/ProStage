@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\Stage;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProStagesController extends AbstractController
 {
@@ -73,7 +74,7 @@ class ProStagesController extends AbstractController
 
   /**
    * @Route("/formations/{intitule}", name="prostages_stagesParFormation")
-   
+
    */
   public function stageParFormation($intitule)
     {
@@ -100,4 +101,61 @@ class ProStagesController extends AbstractController
 	{
 		return $this->render('prostages/stages.html.twig', ['stage' => $stage]);
 	}
+
+  /**
+   * @Route("/creer-entreprise", name="prostages_nouvelle_entreprise")
+   */
+  public function new(Request $request)
+  {
+    $entreprise = new Entreprise();
+
+    $form = $this -> createFormBuilder($entreprise)
+                  -> add('nom')
+                  -> add('activite')
+                  -> add('adresse')
+                  -> add('site')
+                  ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted()) {
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($entreprise);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('prostages_accueil');
+    }
+
+    return $this->render('prostages/creationEntreprise.html.twig', [
+      'form' => $form->createView(),
+    ]);
+  }
+
+  /**
+   * @Route("/modifier-entreprise/{nom}", name="prostages_modif_entreprise")
+   */
+  public function edit(Request $request, Entreprise $entreprise)
+  {
+    $form = $this -> createFormBuilder($entreprise)
+                  -> add('nom')
+                  -> add('activite')
+                  -> add('adresse')
+                  -> add('site')
+                  ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted()) {
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($entreprise);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('prostages_accueil');
+    }
+
+    return $this->render('prostages/modifEntreprise.html.twig', [
+      'form' => $form->createView(),
+    ]);
+  }
+
 }
