@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block contenu %}
-{{ form_start(form)}}
+{{ form_start(form, { 'attr' : {'novalidate':'novalidate'}}) }}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -20,33 +20,30 @@
 					<form role="form">
               <center>
                         <div class="form-group">
-                                        {{ form_label(form.nom,"Nom de l'entreprise : ") }}<br>
-                                        {{ form_errors(form.nom) }}
-                                        {{ form_widget(form.nom) }}
+                                {{ form_label(form.nom,"Nom de l'entreprise : ") }}<br>
+                                {{ form_widget(form.nom) }}
                         </div>
                         <br>
                         <div class="form-group">
                                 {{ form_label(form.activite,"Domaine d'activité : ") }}<br>
-                                {{ form_errors(form.activite) }}
                                 {{ form_widget(form.activite) }}
                         </div>
                         <br>
                         <div class="form-group">
-                                {{ form_label(form.adresse,'Adresse : ') }}<br>
-                                {{ form_errors(form.adresse) }}
+                                {{ form_label(form.adresse,"Adresse : ") }}<br>
                                 {{ form_widget(form.adresse) }}
                         </div>
                         <br>
                         <div class="form-group">
-                                {{ form_label(form.site,'Site Web : ') }}<br>
-                                {{ form_errors(form.site) }}
+                                {{ form_label(form.site,"Site Web : ") }}<br>
                                 {{ form_widget(form.site) }}
                         </div>
                         <br>
                         <br>
                 </center>
                         <center><button class="btn btn-primary" type="submit" >Valider</button></center>
-			        </form>
+												{{ form_rest(form) }}
+							</form>
 				</div>
 			</div>
 		</div>
