@@ -110,7 +110,7 @@ class ProStagesController extends AbstractController
   {
     $entreprise = new Entreprise();
 
-    $form = $this -> CreateForm(EntrepriseType::class,$entreprise);
+    $form = $this -> CreateForm(EntrepriseType::class, $entreprise);
 
     $form->handleRequest($request);
 
@@ -132,12 +132,7 @@ class ProStagesController extends AbstractController
    */
   public function edit(Request $request, Entreprise $entreprise)
   {
-    $form = $this -> createFormBuilder($entreprise)
-                  -> add('nom')
-                  -> add('activite')
-                  -> add('adresse')
-                  -> add('site')
-                  ->getForm();
+    $form = $this -> CreateForm(EntrepriseType::class, $entreprise);
 
     $form->handleRequest($request);
 
