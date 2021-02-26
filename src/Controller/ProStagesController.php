@@ -11,6 +11,7 @@ use App\Entity\Stage;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\EntrepriseType;
 
 class ProStagesController extends AbstractController
 {
@@ -109,12 +110,7 @@ class ProStagesController extends AbstractController
   {
     $entreprise = new Entreprise();
 
-    $form = $this -> createFormBuilder($entreprise)
-                  -> add('nom')
-                  -> add('activite')
-                  -> add('adresse')
-                  -> add('site')
-                  ->getForm();
+    $form = $this -> CreateForm(EntrepriseType::class,$entreprise);
 
     $form->handleRequest($request);
 
