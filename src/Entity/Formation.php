@@ -35,7 +35,8 @@ class Formation
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="Formation")
+     * @ORM\ManyToMany(targetEntity=Stage::class, inversedBy="Formation")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $stages;
 

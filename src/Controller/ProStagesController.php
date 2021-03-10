@@ -12,6 +12,7 @@ use App\Entity\Entreprise;
 use App\Entity\Formation;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\EntrepriseType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProStagesController extends AbstractController
 {
@@ -149,4 +150,40 @@ class ProStagesController extends AbstractController
     ]);
   }
 
+  /**
+   * @Route("/creer-stage", name="prostages_nouveau_stage")
+   */
+   public function newStage(Request $request)
+     {
+         $stage = new Stage();
+
+         $form = $this -> createFormBuilder($stage)
+                         -> add('titre')
+                         -> add('descriptif')
+                         -> add('dateDebut')
+                         -> add('duree')
+                         -> add('competencesRequises')
+                         -> add('experienceRequise')
+                         -> add('entreprise',EntrepriseType::class)
+                         ->add('formation',EntityType::class,
+                         ['class'=>Formation::class,
+                         'choice_label'=>'intitule',
+                         'multiple'=>true,
+                         'expanded'=>true])
+                         ->getForm();
+
+         $form->handleRequest($request);
+
+         if ($form->isSubmitted() && $form->isValid()) {
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($stage);
+             $entityManager->flush();
+
+             return $this->redirectToRoute('accueil');
+        }
+
+         return $this->render('prostages/creationStage.html.twig', [
+             'form' => $form->createView(),
+         ]);
+     }
 }
