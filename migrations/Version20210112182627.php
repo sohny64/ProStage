@@ -20,12 +20,12 @@ final class Version20210112182627 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE stage ADD formation_id INT NOT NULL, ADD entreprise_id INT NOT NULL, CHANGE intitule titre VARCHAR(150) NOT NULL');
+        /*$this->addSql('ALTER TABLE stage ADD formation_id INT NOT NULL, ADD entreprise_id INT NOT NULL, CHANGE intitule titre VARCHAR(150) NOT NULL');
         $this->addSql('ALTER TABLE stage ADD CONSTRAINT FK_C27C93695200282E FOREIGN KEY (formation_id) REFERENCES formation (id)');
         $this->addSql('ALTER TABLE stage ADD CONSTRAINT FK_C27C9369A4AEAFEA FOREIGN KEY (entreprise_id) REFERENCES entreprise (id)');
         $this->addSql('CREATE INDEX IDX_C27C93695200282E ON stage (formation_id)');
         $this->addSql('CREATE INDEX IDX_C27C9369A4AEAFEA ON stage (entreprise_id)');
-    }
+    */}
 
     public function down(Schema $schema) : void
     {
