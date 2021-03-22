@@ -7,12 +7,31 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
 use App\Entity\Stage;
+use App\Entity\User;
 
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
+        $armin =  new User();
+        $armin->setPrenom("Armin");
+        $armin->setNom("Ladmin");
+        $armin->setEmail("armin@gmail.com");
+        $armin->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $armin->setPassword('$2y$10$Xn/nu08VvSuSmCypP0J14e8hOTw0nGABK20VGMbhfnDFQxIAuloQ.');
+        $manager->persist($armin);
+
+        $robert =  new User();
+        $robert->setPrenom("Robert");
+        $robert->setNom("Luser");
+        $robert->setEmail("rob@gmail.com");
+        $robert->setRoles(['ROLE_USER']);
+        $robert->setPassword('$2y$10$JamH9EPN6nxf0V6uc/o2heUQs4WnF9vXyWpGbO3uVwI/.FHL0zD.G');
+        $manager->persist($robert);
+
+
 		$faker = \Faker\Factory::create('fr_FR');
 
 		//Creer les diférents types de Formations
@@ -22,7 +41,7 @@ class AppFixtures extends Fixture
           $formation = new Formation();
           $formation->setIntitule($nomFormation);
 		      $formation->setVille($faker->city);
-		      $formation->setNiveau($faker->regexify('BAC+ [1-5]'));	  
+		      $formation->setNiveau($faker->regexify('BAC+ [1-5]'));
           $manager->persist($formation);
           $listeDesFormations[]=$formation;
         }
