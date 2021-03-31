@@ -30,6 +30,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/creer-entreprise">Créer Entreprise</a>
           </li>
+            {% if is_granted('ROLE_ADMIN') %}
+		          <li class="nav-item">
+				          <a class="nav-link" href="/admin">Accès ADMIN</a>
+		          </li>
+		        {% endif %}
         </ul>
         {% if is_granted('ROLE_USER') %}
         <ul class="navbar-nav ml-md-auto">
